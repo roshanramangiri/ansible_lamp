@@ -1,0 +1,89 @@
+---
+      - name: install servers
+        apt: 
+            name="{{item}}" 
+            state=present
+        with_items:
+                - apache2
+                - php
+                - libapache2-mod-php
+        notify: start servers
+
+      - name: delete index.html
+        file:
+            path: /var/www/html/index.html
+            state: absent
+        notify: restart apache server
+
+      - name: clone git repo 
+        git: 
+            repo: https://github.com/roshanramangiri/dynamic_site.git
+            dest: /var/www/html
+        # notify: copy website
+
+      # - name: "Debian | Install Mysql Client package"
+      #   apt:
+      #       name: "{{ item }}"
+      #       state: present
+      #   with_items:
+      #       - mysql-client
+      #       - python3-dev
+      #       - libmysqlclient-dev
+      #       - python3-mysqldb
+  
+      # - name: "Install MySQL Python package"
+      #   pip:
+      #       name: pymysql
+      #       state: present 
+
+      # - name: configuring mysql
+      #   mysql_user:
+      #       name: root
+      #       password: Adex@321
+      #       priv: '*.*:ALL'
+      #       host: '%'
+      #       state: present
+      # - name: create a user
+      #   command: 
+
+      # - name: update mysql root password for all root accounts 
+      #   mysql_user:
+      #       name: root
+      #       host: "{{item}}" 
+      #       password: Adex@321
+      #       login_user: root 
+      #       login_password: "Adex@321"
+      #       check_implicit_admin: yes  
+      #       priv: "*.*:ALL,GRANT"  
+      #   with_items:  
+      #           - server1 
+      #           - ::1  
+      #           - localhost
+     
+      # - name: creating database
+      #   mysql_db:
+      #       name: test_todo
+      #       state: present
+            # login_user: lamp
+            # login_password: Adex@321
+
+        
+      # - name: creating table
+      #   mysql_db:
+      #       login_user: lamp
+      #       login_password: Adex@321
+      #       db: test_todo
+      #       query: >
+      #           CREATE TABLE todo (
+      #                 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      #                 item VARCHAR(255) NOT NULL,
+      #                 status INT(1) NOT NULL DEFAULT '0'
+      #           );
+
+      #   # command: mysql -u lamp -p Adex@321 --execute "CREATE TABLE todo (id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, item VARCHAR(255) NOT NULL, status INT(1) NOT NULL DEFAULT '0')"
+      #   # copy:
+      #   #     src: dump.sql
+      #   #     dest: /tmp/dump.sql
+
+      
+

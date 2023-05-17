@@ -1,0 +1,54 @@
+---      
+      # - name: install servers
+      #   apt: 
+      #       name="{{item}}" 
+      #       state=present
+      #   with_items:
+      #           - mysql-server
+      #           - php-mysql
+      #           - mysql-client
+      #           - python3-dev
+      #           - libmysqlclient-dev
+      #           - python3-mysqldb
+      #   notify: start servers
+     
+      # - name: "Install MySQL Python package"
+      #   pip:
+      #       name: pymysql
+      #       state: present 
+
+      # - name: creating user
+      #   command: >
+      #       sudo mysql -u root
+      #       CREATE USER 'lamp'@'localhost' IDENTIFIED BY 'Adex@321';
+      #       GRANT ALL PRIVILEGES ON * . * TO 'lamp'@'localhost';
+      
+      # - name: configuring mysql
+      #   mysql_user:
+      #       login_user: lamp
+      #       login_password: Adex@321
+      #       name: lamp
+      #       password: Adex@321
+      #       priv: '*.*:ALL'
+      #       host: '%'
+      #       state: present
+      # - name: creating a user
+      #   command: sudo -u root 
+      #             CREATE USER 'lamp'@'localhost' IDENTIFIED BY 'Adex@321';
+      #             GRANT ALL PRIVILEGES ON * . * TO 'lamp'@'localhost';
+
+      # - name: Create MySQL user and grant privileges
+      #   become: true
+      #   mysql_user:
+      #         name: lamp
+      #         host: localhost
+      #         password: Adex@321
+      #         priv: "*.*:ALL"
+      #         state: present
+
+      - name: creating database
+        mysql_db:
+            login_user: lamp
+            login_password: Adex@321
+            name: test_todo
+            state: present

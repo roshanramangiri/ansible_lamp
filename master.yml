@@ -1,0 +1,9 @@
+--- # LAMP
+- hosts: server1
+  become: yes
+  user: root
+  connection: ssh
+
+  roles:
+      - lamp
+      - db

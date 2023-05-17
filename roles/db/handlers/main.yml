@@ -1,0 +1,3 @@
+---
+        - name: start servers
+          action: service name=mysql-server state=started

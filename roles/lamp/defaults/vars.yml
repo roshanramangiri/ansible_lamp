@@ -1,0 +1,4 @@
+---
+     mysqk_user: lamp
+     mysql_password: Adex@321
+     db_name: test_todo

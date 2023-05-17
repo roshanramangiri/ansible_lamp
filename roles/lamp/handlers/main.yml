@@ -1,0 +1,41 @@
+---
+        - name: start servers
+          action: service name='{{item}}' state=started
+          with_items:
+                - apache2
+                - mysql-server
+                - php
+                - libapache2-mod-php
+                - php-mysql
+
+        - name: copy website
+          command: sudo cp -R /home/ubuntu/dynamic_site/* /var/www/html/
+
+
+        - name: restart apache server
+          service:
+                name: apache2
+                state: restarted
+
+        # - name: create table
+        #   command: >
+        #       mysql -u lamp -p Adex@321;
+        #       use test_todo;
+        #       CREATE TABLE todo (id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, item VARCHAR(255) NOT NULL, status INT(1) NOT NULL DEFAULT '0');
+          # mysql_db:
+          #       name: test_todo
+          #       login_user: lamp
+          #       login_password: Adex@321
+          #       state: present
+          #       target: todo
+          #       sql: > 
+          #             CREATE TABLE todo (
+          #                 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+          #                 item VARCHAR(255) NOT NULL,
+          #                 status INT(1) NOT NULL DEFAULT '0'
+          #             );
+
+
+                    
+          
+          
